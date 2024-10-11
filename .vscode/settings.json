@@ -8,7 +8,9 @@
   "css.lint.unknownAtRules": "ignore",
   "cSpell.words": [
     "clsx",
+    "kinde",
     "lucide",
+    "nextjs",
     "picsum",
     "tailwindcss"
   ]

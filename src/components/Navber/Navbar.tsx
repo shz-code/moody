@@ -1,66 +1,48 @@
 import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import { cn } from "@/lib/utils";
-import { ArrowRight, FileMusic } from "lucide-react";
+  LoginLink,
+  RegisterLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { buttonVariants } from "../ui/button";
 
 const Navbar = () => {
   return (
-    <header className="container">
-      <div className="py-4 flex justify-between items-center">
+    <header className="sticky top-0 z-30 border-b bg-primary-foreground">
+      <div className="container py-4 flex justify-between items-center">
         <div className="logo">
-          <FileMusic className="h-12 w-12 brand-color" />
+          <span className="font-bold brand-color text-xl"> moody.</span>
         </div>
-        <NavigationMenu className="hidden md:flex">
-          <NavigationMenuList>
-            <Link
-              href={"/"}
-              legacyBehavior
-              passHref
-              className="inline-block w-full"
-            >
-              <NavigationMenuLink className={cn(navigationMenuTriggerStyle())}>
-                Home
-              </NavigationMenuLink>
-            </Link>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>About Moody</NavigationMenuTrigger>
-              <NavigationMenuContent>
+        <div className="flex gap-2">
+          <nav className="hidden md:block">
+            <ul className="flex">
+              <li>
                 <Link
-                  href={"/"}
-                  legacyBehavior
-                  passHref
-                  className="hover:bg-accent inline-block w-full"
+                  className={buttonVariants({ variant: "ghost" })}
+                  href="/pricing"
                 >
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Developer
-                  </NavigationMenuLink>
+                  Pricing
                 </Link>
+              </li>
+              <li>
                 <Link
-                  href={"/"}
-                  legacyBehavior
-                  passHref
-                  className="hover:bg-accent inline-block w-full"
+                  className={buttonVariants({ variant: "ghost" })}
+                  href="/faq"
                 >
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Pricing
-                  </NavigationMenuLink>
+                  FAQ
                 </Link>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
-        <Button>
-          Get Started <ArrowRight className="ml-2 h-5 w-5" />
-        </Button>
+              </li>
+              <li>
+                <LoginLink className={buttonVariants({ variant: "outline" })}>
+                  Sign in
+                </LoginLink>
+              </li>
+            </ul>
+          </nav>
+          <RegisterLink className={buttonVariants()}>
+            Get Started <ArrowRight className="ml-2 h-5 w-5" />
+          </RegisterLink>
+        </div>
       </div>
     </header>
   );
