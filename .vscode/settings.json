@@ -8,6 +8,7 @@
   "css.lint.unknownAtRules": "ignore",
   "cSpell.words": [
     "clsx",
+    "picsum",
     "tailwindcss"
   ]
 }
