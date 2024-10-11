@@ -1,3 +1,5 @@
+import Footer from "@/components/Footer/Footer";
+import Navbar from "@/components/Navber/Navbar";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -19,7 +21,9 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
   return (
     <html lang="en" className="light">
       <body className={cn("font-sans antialiased grainy", inter.className)}>
+        <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
