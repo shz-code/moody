@@ -1,12 +1,17 @@
 import {
   LoginLink,
+  LogoutLink,
   RegisterLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
-import { ArrowRight } from "lucide-react";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { ArrowRight, LogOut } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
 
-const Navbar = () => {
+const Navbar = async () => {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
   return (
     <header className="sticky top-0 z-30 border-b bg-primary-foreground">
       <div className="container py-4 flex justify-between items-center">
@@ -35,15 +40,28 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <LoginLink className={buttonVariants({ variant: "outline" })}>
-                  Sign in
-                </LoginLink>
+                {user ? (
+                  <LogoutLink
+                    className={buttonVariants({
+                      variant: "destructive",
+                      className: "hover:bg-red-100",
+                    })}
+                  >
+                    Logout <LogOut className="ml-2 h-5 w-5" />
+                  </LogoutLink>
+                ) : (
+                  <LoginLink className={buttonVariants({ variant: "outline" })}>
+                    Sign in
+                  </LoginLink>
+                )}
               </li>
             </ul>
           </nav>
-          <RegisterLink className={buttonVariants()}>
-            Get Started <ArrowRight className="ml-2 h-5 w-5" />
-          </RegisterLink>
+          {!user && (
+            <RegisterLink className={buttonVariants()}>
+              Get Started <ArrowRight className="ml-2 h-5 w-5" />
+            </RegisterLink>
+          )}
         </div>
       </div>
     </header>
