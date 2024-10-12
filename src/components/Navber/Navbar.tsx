@@ -11,7 +11,9 @@ const Navbar = () => {
     <header className="sticky top-0 z-30 border-b bg-primary-foreground">
       <div className="container py-4 flex justify-between items-center">
         <div className="logo">
-          <span className="font-bold brand-color text-xl"> moody.</span>
+          <Link href="/" className="font-bold brand-color text-xl">
+            moody.
+          </Link>
         </div>
         <div className="flex gap-2">
           <nav className="hidden md:block">

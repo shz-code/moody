@@ -23,9 +23,11 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
     <html lang="en" className="light">
       <body className={cn("font-sans antialiased grainy", inter.className)}>
         <Providers>
-          <Navbar />
-          {children}
-          <Footer />
+          <div className="flex flex-col min-h-screen">
+            <Navbar />
+            <div className="flex-grow">{children}</div>
+            <Footer />
+          </div>
         </Providers>
       </body>
     </html>
