@@ -1,5 +1,7 @@
 "use client";
 
+import { useToast } from "@/hooks/use-toast";
+import { useUploadThing } from "@/lib/uploadthing";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 import { Cloud, File } from "lucide-react";
 import { useState } from "react";
@@ -11,6 +13,9 @@ import { Progress } from "../ui/progress";
 const UploadDropZone = () => {
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
+
+  const { startUpload } = useUploadThing("pdfUploader");
+  const { toast } = useToast();
 
   const startSimulatedProgress = () => {
     setUploadProgress(0);
@@ -34,9 +39,32 @@ const UploadDropZone = () => {
 
         // AWAIT
         // await new Promise((resolve) => setTimeout(resolve, 5000));
+        try {
+          const res = await startUpload(acceptedFiles);
+          console.log(res);
 
-        clearInterval(progressInterval);
-        setUploadProgress(100);
+          // const [fileResponse] = res!;
+          // const key = fileResponse?.key;
+
+          // if (!key) {
+          //   return toast({
+          //     title: "Something went wrong",
+          //     description: "Please try again later",
+          //     variant: "destructive",
+          //   });
+          // }
+        } catch (error) {
+          console.log(error);
+
+          return toast({
+            title: "Something went wrong",
+            description: "Please try again later",
+            variant: "destructive",
+          });
+        } finally {
+          clearInterval(progressInterval);
+          setUploadProgress(100);
+        }
       }}
     >
       {({ getRootProps, getInputProps, acceptedFiles }) => (

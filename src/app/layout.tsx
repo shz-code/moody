@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navber/Navbar";
 import Providers from "@/components/Providers";
+import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -25,6 +26,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
       <body className={cn("font-sans antialiased grainy", inter.className)}>
         <Providers>
           <div className="flex flex-col min-h-screen">
+            <Toaster />
             <Navbar />
             <div className="flex flex-grow">{children}</div>
             <Footer />
