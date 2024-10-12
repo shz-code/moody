@@ -12,6 +12,8 @@
     "lucide",
     "nextjs",
     "picsum",
-    "tailwindcss"
+    "tailwindcss",
+    "tanstack",
+    "TRPC"
   ]
 }

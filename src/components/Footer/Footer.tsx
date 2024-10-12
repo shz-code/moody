@@ -80,19 +80,19 @@ const Footer = () => {
               Designed Inspired
             </p>
             <div className="flex space-x-4 mt-4 md:mt-0">
-              <Link href="#" className="hover:text-primary-foreground/80">
+              <Link href="#">
                 <Facebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
               </Link>
-              <Link href="#" className="hover:text-primary-foreground/80">
+              <Link href="#">
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </Link>
-              <Link href="#" className="hover:text-primary-foreground/80">
+              <Link href="#">
                 <Instagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </Link>
-              <Link href="#" className="hover:text-primary-foreground/80">
+              <Link href="#">
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </Link>
