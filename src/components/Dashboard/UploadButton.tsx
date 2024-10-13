@@ -52,7 +52,7 @@ const UploadDropZone = () => {
         // await new Promise((resolve) => setTimeout(resolve, 5000));
 
         const res = await startUpload(acceptedFiles);
-        console.log(res);
+        // console.log(res);
 
         const [fileResponse] = res!;
         const key = fileResponse?.key;

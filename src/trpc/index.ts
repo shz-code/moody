@@ -1,4 +1,5 @@
 import { db } from "@/db";
+import { utapi } from "@/uploadThing";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
@@ -59,6 +60,9 @@ export const appRouter = router({
         },
       });
       if (!file) throw new TRPCError({ code: "NOT_FOUND" });
+
+      // Delete form uploadThing
+      await utapi.deleteFiles([file.key]);
 
       await db.file.delete({ where: { id: input.id } });
 

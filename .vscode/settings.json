@@ -15,6 +15,7 @@
     "tailwindcss",
     "tanstack",
     "TRPC",
-    "Uploadthing"
+    "Uploadthing",
+    "utapi"
   ]
 }

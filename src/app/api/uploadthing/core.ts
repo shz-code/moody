@@ -10,8 +10,6 @@ export const ourFileRouter = {
       const { getUser } = getKindeServerSession();
       const user = await getUser();
 
-      console.log("here");
-
       if (!user || !user.id) throw new Error("Unauthorized");
       return { userId: user.id };
     })
