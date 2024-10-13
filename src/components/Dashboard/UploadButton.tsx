@@ -1,9 +1,11 @@
 "use client";
 
+import { trpc } from "@/app/_trpc/client";
 import { useToast } from "@/hooks/use-toast";
 import { useUploadThing } from "@/lib/uploadthing";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 import { Cloud, File } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Dropzone from "react-dropzone";
 import { Button } from "../ui/button";
@@ -11,11 +13,20 @@ import { Dialog, DialogContent } from "../ui/dialog";
 import { Progress } from "../ui/progress";
 
 const UploadDropZone = () => {
+  const router = useRouter();
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
 
   const { startUpload } = useUploadThing("pdfUploader");
   const { toast } = useToast();
+
+  const { mutate: startPolling } = trpc.getFile.useMutation({
+    onSuccess: (file) => {
+      router.push(`/dashboard/${file.id}`);
+    },
+    retry: true,
+    retryDelay: 500,
+  });
 
   const startSimulatedProgress = () => {
     setUploadProgress(0);
@@ -39,32 +50,23 @@ const UploadDropZone = () => {
 
         // AWAIT
         // await new Promise((resolve) => setTimeout(resolve, 5000));
-        try {
-          const res = await startUpload(acceptedFiles);
-          console.log(res);
 
-          // const [fileResponse] = res!;
-          // const key = fileResponse?.key;
+        const res = await startUpload(acceptedFiles);
+        console.log(res);
 
-          // if (!key) {
-          //   return toast({
-          //     title: "Something went wrong",
-          //     description: "Please try again later",
-          //     variant: "destructive",
-          //   });
-          // }
-        } catch (error) {
-          console.log(error);
+        const [fileResponse] = res!;
+        const key = fileResponse?.key;
 
+        if (!key) {
           return toast({
             title: "Something went wrong",
             description: "Please try again later",
             variant: "destructive",
           });
-        } finally {
-          clearInterval(progressInterval);
-          setUploadProgress(100);
         }
+        clearInterval(progressInterval);
+        setUploadProgress(100);
+        startPolling({ key });
       }}
     >
       {({ getRootProps, getInputProps, acceptedFiles }) => (
