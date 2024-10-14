@@ -1,10 +1,15 @@
 import ChatWrapper from "@/components/ChatWrapper/ChatWrapper";
-import PdfRenderer from "@/components/PdfRenderer/PdfRenderer";
 import { db } from "@/db";
 import { authCallbackLink } from "@/lib/utils";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import dynamic from "next/dynamic";
 import { notFound, redirect } from "next/navigation";
 import { FC } from "react";
+
+const PdfRenderer = dynamic(
+  () => import("@/components/PdfRenderer/PdfRenderer"),
+  { ssr: false }
+);
 
 interface PageProps {
   params: {
@@ -33,7 +38,7 @@ const Page: FC<PageProps> = async ({ params }) => {
         <div className="w-full">
           <div className="px-4 py-6 sm:px-6 lg:pl-8 xl:flex-1 xl:pl-6">
             {/* Main area */}
-            <PdfRenderer />
+            <PdfRenderer url={file.url} />
           </div>
         </div>
 

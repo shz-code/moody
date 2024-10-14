@@ -4,12 +4,12 @@ import { trpc } from "@/app/_trpc/client";
 import { useToast } from "@/hooks/use-toast";
 import { useUploadThing } from "@/lib/uploadthing";
 import { DialogTrigger } from "@radix-ui/react-dialog";
-import { Cloud, File } from "lucide-react";
+import { Cloud, File, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Dropzone from "react-dropzone";
 import { Button } from "../ui/button";
-import { Dialog, DialogContent } from "../ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
 import { Progress } from "../ui/progress";
 
 const UploadDropZone = () => {
@@ -83,10 +83,10 @@ const UploadDropZone = () => {
               >
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                   <Cloud className="h-6 w-6 text-zinc-500 mb-2" />
-                  <p className="mb-2 text-sm text-zinc-700">
+                  <DialogTitle className="mb-2 text-sm text-zinc-700">
                     <span className="font-semibold">Click to upload</span> or
                     drag and drop
-                  </p>
+                  </DialogTitle>
                   <p className="text-xs text-zinc-500">PDF (up to 4 MB)</p>
                 </div>
 
@@ -105,8 +105,17 @@ const UploadDropZone = () => {
                   <div className="w-full mt-4 max-w-xs">
                     <Progress
                       value={uploadProgress}
+                      indicatorColor={
+                        uploadProgress === 100 ? "bg-green-500" : "null"
+                      }
                       className="h-1 bg-zinc-200"
                     />
+                    {uploadProgress === 100 ? (
+                      <div className="flex gap-1 items-center justify-center text-sm text-zinc-700 text-center pt-2">
+                        <Loader2 className="h-3 w-3 animate-spin" />
+                        Redirecting...
+                      </div>
+                    ) : null}
                   </div>
                 ) : null}
               </label>
@@ -132,7 +141,7 @@ const UploadButton = () => {
         <Button>Upload PDF</Button>
       </DialogTrigger>
 
-      <DialogContent>
+      <DialogContent aria-describedby={undefined}>
         <UploadDropZone />
       </DialogContent>
     </Dialog>
