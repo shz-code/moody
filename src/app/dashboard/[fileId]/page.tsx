@@ -43,7 +43,7 @@ const Page: FC<PageProps> = async ({ params }) => {
         </div>
 
         <div className="w-full border-t border-gray-200 lg:w-3/4 lg:border-l lg:border-t-0">
-          <ChatWrapper />
+          <ChatWrapper fileId={fileId} />
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const Home = async () => {
   return (
-    <div className="container">
+    <div className="container pb-12">
       <div className="mb-12 mt-28 sm:mt40 flex flex-col justify-center items-center text-center">
         <div className="mx-auto mb-4 rounded-full border border-gray-200 bg-white px-7 py-2 shadow-md backdrop-blur transition-all hover:border-gray-300 pointer-events-none hover:bg-white/50">
           <p className="text-sm font-semibold text-gray-700">
