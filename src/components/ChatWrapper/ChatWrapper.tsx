@@ -82,7 +82,6 @@ const ChatWrapper = ({ fileId }: { fileId: string }) => {
       <div className="flex-1 justify-between flex flex-col mb-28">
         <Messages />
       </div>
-
       <ChatInput />
     </div>
   );
