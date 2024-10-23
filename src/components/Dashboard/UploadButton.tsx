@@ -75,7 +75,7 @@ const UploadDropZone = () => {
             {...getRootProps()}
             className="border h-64 m-4 border-dashed border-gray-300 rounded-lg"
           >
-            <input {...getInputProps()} />
+            <input {...getInputProps()} accept=".pdf" />
             <div className="grid place-items-center h-full w-full">
               <label
                 htmlFor="dropzone-file"
